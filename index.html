@@ -1,91 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Landscape Slider</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Landscape Slider</title>
 
-  <!-- Swiper CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden;
-      background: transparent;
-      font-family: Arial, sans-serif;
-    }
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  font-family: Arial, sans-serif;
+}
 
-    .swiper {
-      width: 100%;
-      height: 100%;
-    }
+.swiper {
+  width: 100%;
+  height: 100%;
+}
 
-    .swiper-wrapper,
-    .swiper-slide {
-      height: 100%;
-    }
+.swiper-wrapper,
+.swiper-slide {
+  height: 100%;
+}
 
-    .swiper-slide {
-      position: relative;
-    }
+.swiper-slide {
+  position: relative;
+  cursor: pointer;
+}
 
-    .swiper-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+.swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform 6s ease;
+}
 
-      transform: scale(1);
-      transition: transform 6s ease;
-    }
+.swiper-slide-active img {
+  transform: scale(1.05);
+}
 
-    .swiper-slide-active img {
-      transform: scale(1.05);
-    }
+/* Overlay text */
+.overlay {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  color: white;
+  font-size: 28px;
+  background: rgba(0,0,0,0.4);
+  padding: 10px 20px;
+  border-radius: 4px;
+}
 
-    .overlay {
-      position: absolute;
-      bottom: 40px;
-      left: 40px;
-      color: white;
-      font-size: 28px;
-      background: rgba(0,0,0,0.4);
-      padding: 10px 20px;
-      border-radius: 4px;
-    }
+/* Pagination */
+.swiper-pagination {
+  bottom: 20px !important;
+}
 
-    .swiper-pagination {
-      bottom: 20px !important;
-    }
+.swiper-pagination-bullet {
+  background: white;
+  opacity: 0.7;
+}
 
-    .swiper-pagination-bullet {
-      background: white;
-      opacity: 0.7;
-    }
+.swiper-pagination-bullet-active {
+  opacity: 1;
+}
 
-    .swiper-pagination-bullet-active {
-      opacity: 1;
-    }
+/* Arrows hidden by default */
+.swiper-button-next,
+.swiper-button-prev {
+  color: white;
+  width: 50px;
+  height: 50px;
+  background: rgba(0,0,0,0.4);
+  border-radius: 50%;
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
 
-    /* ARROWS */
-    .swiper-button-next,
-    .swiper-button-prev {
-      color: white;
-      width: 50px;
-      height: 50px;
-      background: rgba(0,0,0,0.4);
-      border-radius: 50%;
-      backdrop-filter: blur(4px);
-    }
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 16px;
+}
 
-    .swiper-button-next::after,
-    .swiper-button-prev::after {
-      font-size: 16px;
-      font-weight: bold;
-    }
-  </style>
+/* Show arrows on hover (desktop only) */
+@media (hover: hover) {
+  .swiper:hover .swiper-button-next,
+  .swiper:hover .swiper-button-prev {
+    opacity: 1;
+  }
+}
+
+/* ---------- LIGHTBOX ---------- */
+
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.95);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.lightbox img {
+  max-width: 95%;
+  max-height: 90%;
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+/* Close button */
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+}
+</style>
 </head>
 
 <body>
@@ -93,79 +137,102 @@
 <div class="swiper">
   <div class="swiper-wrapper">
 
-    <div class="swiper-slide">
+    <div class="swiper-slide" data-img="images/landscape-01-01.png">
       <img src="images/landscape-01-01.png">
       <div class="overlay">Existing Condition</div>
     </div>
 
-    <div class="swiper-slide">
+    <div class="swiper-slide" data-img="images/landscape-01-02.png">
       <img src="images/landscape-01-02.png">
     </div>
 
-    <div class="swiper-slide">
+    <div class="swiper-slide" data-img="images/landscape-01-03.png">
       <img src="images/landscape-01-03.png">
     </div>
 
-    <div class="swiper-slide">
+    <div class="swiper-slide" data-img="images/landscape-01-04.png">
       <img src="images/landscape-01-04.png">
       <div class="overlay">Concept Development</div>
     </div>
 
-    <div class="swiper-slide">
+    <div class="swiper-slide" data-img="images/landscape-01-05.png">
       <img src="images/landscape-01-05.png">
     </div>
 
-    <div class="swiper-slide">
+    <div class="swiper-slide" data-img="images/landscape-01-06.png">
       <img src="images/landscape-01-06.png">
     </div>
 
-    <div class="swiper-slide">
+    <div class="swiper-slide" data-img="images/landscape-01-07.png">
       <img src="images/landscape-01-07.png">
     </div>
 
-    <div class="swiper-slide">
+    <div class="swiper-slide" data-img="images/landscape-01-08.png">
       <img src="images/landscape-01-08.png">
     </div>
 
-    <div class="swiper-slide">
+    <div class="swiper-slide" data-img="images/landscape-01-09.png">
       <img src="images/landscape-01-09.png">
       <div class="overlay">Final Design Vision</div>
     </div>
 
   </div>
 
-  <!-- Pagination -->
   <div class="swiper-pagination"></div>
-
-  <!-- Arrows -->
   <div class="swiper-button-prev"></div>
   <div class="swiper-button-next"></div>
-
 </div>
 
-<!-- Swiper JS -->
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="closeBtn">&times;</span>
+  <img id="lightboxImg">
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script>
-  const swiper = new Swiper('.swiper', {
-    loop: true,
-    effect: 'fade',
-    fadeEffect: {
-      crossFade: true
-    },
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
+const swiper = new Swiper('.swiper', {
+  loop: true,
+  effect: 'fade',
+  fadeEffect: {
+    crossFade: true
+  },
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false,
+  },
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+});
+
+/* LIGHTBOX LOGIC */
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const closeBtn = document.getElementById('closeBtn');
+
+document.querySelectorAll('.swiper-slide').forEach(slide => {
+  slide.addEventListener('click', () => {
+    lightboxImg.src = slide.getAttribute('data-img');
+    lightbox.classList.add('active');
   });
+});
+
+closeBtn.addEventListener('click', () => {
+  lightbox.classList.remove('active');
+});
+
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) {
+    lightbox.classList.remove('active');
+  }
+});
 </script>
 
 </body>
